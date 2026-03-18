@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Musiq Design System - Obsidian Synth */
+    --background: 216 25% 7%;         /* #0B0F14 */
+    --background-deep: 220 30% 5%;    /* Deeper layer */
+    --card: 218 29% 10%;              /* #121821 */
+    --card-hover: 218 29% 13%;
+
+    --foreground: 0 0% 100%;
+    --card-foreground: 0 0% 100%;
+    --popover: 218 29% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Neon Cyan Primary */
+    --primary: 191 100% 50%;          /* #00E5FF */
+    --primary-foreground: 216 25% 7%;
+    --primary-glow: 191 100% 60%;
+
+    /* Spotify Green Accent */
+    --accent: 141 69% 52%;            /* #1DB954 */
+    --accent-foreground: 0 0% 100%;
+
+    --secondary: 218 29% 14%;
+    --secondary-foreground: 0 0% 80%;
+
+    --muted: 218 20% 18%;
+    --muted-foreground: 214 20% 60%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 100% / 0.05;
+    --input: 218 29% 14%;
+    --ring: 191 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 216 25% 7%;
+    --sidebar-foreground: 0 0% 80%;
+    --sidebar-primary: 191 100% 50%;
+    --sidebar-primary-foreground: 216 25% 7%;
+    --sidebar-accent: 218 29% 14%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100% / 0.05;
+    --sidebar-ring: 191 100% 50%;
+
+    /* Custom Tokens */
+    --glass-bg: rgba(18, 24, 33, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glow-cyan: 0 0 20px rgba(0, 229, 255, 0.25);
+    --glow-cyan-strong: 0 0 40px rgba(0, 229, 255, 0.4);
+    --glow-green: 0 0 20px rgba(29, 185, 84, 0.3);
+    --shadow-deep: 0 10px 30px -10px rgba(0,0,0,0.6);
+    --player-height: 96px;
+  }
+
+  .dark {
+    --background: 216 25% 7%;
+    --foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    background-color: #0B0F14;
+    color: hsl(var(--foreground));
+    font-family: 'Outfit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 255, 0.2);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 229, 255, 0.5);
+  }
+
+  /* Mono font for metadata */
+  .font-mono-data {
+    font-family: 'Space Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Glass card surface */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), var(--shadow-deep);
+  }
+
+  /* Neon trace — active state underline/glow */
+  .neon-trace {
+    position: relative;
+  }
+  .neon-trace::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: #00E5FF;
+    box-shadow: 0 0 6px rgba(0, 229, 255, 0.8);
+  }
+
+  /* Cyan focus ring */
+  .focus-cyan:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px #00E5FF, 0 0 12px rgba(0, 229, 255, 0.3);
+  }
+
+  /* Glow track progress bar */
+  .glow-track {
+    background: linear-gradient(90deg, #00E5FF, #00B8D4);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6), 0 0 16px rgba(0, 229, 255, 0.2);
+  }
+
+  /* Active pulse for social status */
+  .status-pulse {
+    position: relative;
+  }
+  .status-pulse::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: rgba(29, 185, 84, 0.4);
+    animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+  }
+
+  /* Equalizer bars */
+  .eq-bar {
+    background: linear-gradient(to top, #00E5FF, #00B8D4);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(0, 229, 255, 0.5);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .text-balance { text-wrap: balance; }
+  .tracking-tight-display { letter-spacing: -0.04em; }
+  .tracking-sidebar { letter-spacing: 0.06em; }
+
+  .bg-glass { background: var(--glass-bg); }
+  .border-glass { border-color: var(--glass-border); }
+  .shadow-glow-cyan { box-shadow: var(--glow-cyan); }
+  .shadow-glow-cyan-strong { box-shadow: var(--glow-cyan-strong); }
+  .shadow-glow-green { box-shadow: var(--glow-green); }
+  .shadow-deep { box-shadow: var(--shadow-deep); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+
+@keyframes eq-bounce-1 {
+  0%, 100% { height: 6px; }
+  25% { height: 20px; }
+  50% { height: 10px; }
+  75% { height: 16px; }
+}
+@keyframes eq-bounce-2 {
+  0%, 100% { height: 14px; }
+  25% { height: 6px; }
+  50% { height: 20px; }
+  75% { height: 8px; }
+}
+@keyframes eq-bounce-3 {
+  0%, 100% { height: 10px; }
+  25% { height: 18px; }
+  50% { height: 6px; }
+  75% { height: 22px; }
+}
+@keyframes eq-bounce-4 {
+  0%, 100% { height: 18px; }
+  25% { height: 8px; }
+  50% { height: 16px; }
+  75% { height: 4px; }
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.eq-bar-1 { animation: eq-bounce-1 0.8s ease-in-out infinite; }
+.eq-bar-2 { animation: eq-bounce-2 0.9s ease-in-out infinite 0.1s; }
+.eq-bar-3 { animation: eq-bounce-3 0.7s ease-in-out infinite 0.2s; }
+.eq-bar-4 { animation: eq-bounce-4 1s ease-in-out infinite 0.05s; }
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 100%);
+  background-size: 400px 100%;
+  animation: shimmer 1.5s infinite;
+}
